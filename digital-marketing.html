@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing Services - Future Web Solutions</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['"Outfit"', 'sans-serif'],
+                    },
+                    colors: {
+                        niva: {
+                            dark: '#0F0F0F', // Jet Black
+                            primary: '#E6C15A', // Brighter Gold
+                            secondary: '#E6C15A', // Brighter Gold
+                            accent: '#E6C15A', // Brighter Gold
+                            royal: '#1F3C88', // Royal Blue
+                            glass: 'rgba(255, 255, 255, 0.05)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #0F0F0F;
+            --text-primary: #FAFAFA;
+            --text-muted: #94A3B8;
+            --gold: #E6C15A;
+            --royal-blue: #1F3C88;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* GLASSMORPHISM UTILITIES */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.4));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(230, 193, 90, 0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(230, 193, 90, 0.3);
+        }
+
+        /* TYPOGRAPHY GRADIENTS */
+        .text-gradient {
+            background: linear-gradient(to right, var(--gold), #B8860B, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradientMove 5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* BUTTONS */
+        .niva-btn {
+            background: var(--royal-blue);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .niva-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, #0D1B4A, var(--royal-blue));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .niva-btn:hover::before {
+            opacity: 1;
+        }
+
+        .niva-btn:hover {
+            box-shadow: 0 0 20px rgba(31, 60, 136, 0.5);
+            transform: scale(1.02);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0F0F0F; }
+        ::-webkit-scrollbar-thumb { background: #2E2E2E; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-rgba(11, 11, 11, 0.85) backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <img src="logo.png" alt="Logo" class="h-12 w-auto group-hover:scale-105 transition-transform">
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Back to Home</a>
+                <a href="index.html#contact" class="niva-btn px-6 py-2.5 rounded-full font-semibold text-sm shadow-lg shadow-[#1F3C88]/20">Let's Talk</a>
+            </nav>
+
+            <button id="mobile-menu-button" class="md:hidden text-white p-2">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 z-40 hidden backdrop-blur-sm"></div>
+
+    <div id="mobile-menu" class="fixed top-0 right-0 w-[85%] max-w-sm h-full z-50 transform translate-x-full transition-transform duration-300 ease-out border-l border-white/10">
+        <div class="p-6 flex flex-col h-full">
+            <div class="flex justify-between items-center mb-12">
+                <img src="logo.png" alt="Logo" class="h-8 w-auto">
+                <button id="mobile-menu-close-button" class="bg-white/10 p-2 rounded-full hover:bg-white/20">
+                    <i data-feather="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div class="flex flex-col space-y-6">
+                <div class="space-y-4">
+                    <a href="index.html" class="block text-xl font-medium text-white hover:text-[#E6C15A]">Back to Home</a>
+                </div>
+            </div>
+
+            <div class="mt-auto">
+                <a href="index.html#contact" class="niva-btn w-full block text-center py-4 rounded-xl font-bold text-lg">Start Project</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="pt-[80px]">
+        <section class="relative pt-32 pb-20 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#E6C15A]/30 to-slate-950 z-0"></div>
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <span class="text-[#E6C15A] font-bold tracking-widest uppercase mb-4 block">Growth Services</span>
+                <h1 class="text-5xl md:text-7xl font-heading font-bold mb-6 text-white">Digital Marketing</h1>
+                <p class="text-xl text-slate-400 max-w-2xl mx-auto">Accelerate your brand with data-driven strategies designed for the modern web.</p>
+            </div>
+        </section>
+
+        <section class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-card p-8 rounded-2xl">
+                        <i data-feather="file-text" class="text-[#E6C15A] w-10 h-10 mb-4"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Content Creation</h3>
+                        <p class="text-slate-400 text-sm">Creating engaging content to connect with your audience.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl">
+                        <i data-feather="instagram" class="text-[#E6C15A] w-10 h-10 mb-4"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Social Media Marketing (SMM)</h3>
+                        <p class="text-slate-400 text-sm">Full management of Instagram, LinkedIn, and Facebook to grow your community.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl">
+                        <i data-feather="video" class="text-[#E6C15A] w-10 h-10 mb-4"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">Video Editing</h3>
+                        <p class="text-slate-400 text-sm">Professional video editing for compelling visual stories.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl">
+                        <i data-feather="image" class="text-[#E6C15A] w-10 h-10 mb-4"></i>
+                        <h3 class="text-xl font-bold text-white mb-2">UGC Ads Creation</h3>
+                        <p class="text-slate-400 text-sm">User-generated content ads to boost engagement.</p>
+                    </div>
+                </div>
+
+                <div class="mt-20 text-center">
+                    <div class="glass-panel inline-block p-10 rounded-3xl border border-indigo-500/30">
+                        <h2 class="text-3xl font-bold mb-4">Ready to grow?</h2>
+                        <a href="index.html#contact" class="niva-btn px-10 py-3 rounded-full font-bold inline-block">Get a Quote</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#0F0F0F] pt-20 pb-10 border-t border-white/5 text-slate-400 font-light">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <img src="logo.png" alt="Logo" class="h-8 w-auto">
+                    </div>
+                    <p class="max-w-sm mb-6">Empowering businesses with next-gen digital solutions. We design the future.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E6C15A] hover:text-black transition-all"><i data-feather="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E6C15A] hover:text-black transition-all"><i data-feather="linkedin" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E6C15A] hover:text-black transition-all"><i data-feather="facebook" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="digital-marketing.html" class="hover:text-[#E6C15A] transition-colors">Digital Marketing</a></li>
+                        <li><a href="index.html#web-development-link" class="hover:text-[#E6C15A] transition-colors">Web Development</a></li>
+                        <li><a href="#" class="hover:text-[#E6C15A] transition-colors">UI/UX Design</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2"><i data-feather="mail" class="w-4 h-4 text-[#E6C15A]"></i> contact@nivadigital.com</li>
+                        <li class="flex items-center gap-2"><i data-feather="phone" class="w-4 h-4 text-[#E6C15A]"></i> +91 7977668088</li>
+                        <li class="flex items-center gap-2"><i data-feather="map-pin" class="w-4 h-4 text-[#E6C15A]"></i> India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center text-sm">
+                &copy; 2025. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            feather.replace();
+
+            // Mobile Menu
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const closeBtn = document.getElementById('mobile-menu-close-button');
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+
+            function toggleMenu() {
+                menu.classList.toggle('translate-x-full');
+                overlay.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden');
+            }
+
+            if(menuBtn) menuBtn.addEventListener('click', toggleMenu);
+            if(closeBtn) closeBtn.addEventListener('click', toggleMenu);
+            if(overlay) overlay.addEventListener('click', toggleMenu);
+        });
+    </script>
+</body>
+</html>
